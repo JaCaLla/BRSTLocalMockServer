@@ -1,0 +1,14 @@
+{
+	"result": 0,
+	"response": {
+		"cafes": [{
+			"url": "https://www.nespresso.com/jp/ja/home",
+			"latitude": 35.6883894,
+			"longitude": 139.7021699
+		}, {
+			"url": "http://nestle.jp/entertain/cafe/index.php",
+			"latitude": 35.6726112,
+			"longitude": 139.7037041
+		}]
+	}
+}
