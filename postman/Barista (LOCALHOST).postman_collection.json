@@ -1,0 +1,35 @@
+{
+	"id": "e31fcc76-8ad1-3214-de73-04d63deec463",
+	"name": "Barista (LOCALHOST)",
+	"description": "",
+	"order": [
+		"048008a1-c1f2-f7d2-5978-d96183b09469"
+	],
+	"folders": [],
+	"timestamp": 1485256464665,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "048008a1-c1f2-f7d2-5978-d96183b09469",
+			"headers": "x-barista-auth: b127c159bf3175173b9a6f031ef3ae461bf89dea23620b9392e144ac847370a0\n",
+			"url": "http://localhost:3000/api/notifications/count",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "e31fcc76-8ad1-3214-de73-04d63deec463",
+			"data": [],
+			"dataMode": "raw",
+			"name": "notifications/count",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1485258811475,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\r     \"since\": 0\r}"
+		}
+	]
+}

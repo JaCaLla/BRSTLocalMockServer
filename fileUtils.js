@@ -11,7 +11,7 @@ module.exports.sendFile = function (originalUrl, res) {
    // console.log("filepath:" + filePath);
 
     fs.readFile(filePath, 'utf8', function(err, data) {
-        //console.log(data);
+    //    console.log(data);
         res.send(JSON.parse(data));
     });
 };

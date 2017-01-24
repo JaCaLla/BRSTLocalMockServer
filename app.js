@@ -18,6 +18,9 @@ app.use(bodyParser.urlencoded({
 }))
 
 
+var notifications = require('./notifications.js');
+notifications.count(app);
+
 var brews = require('./brews.js');
 brews.create(app);
 
