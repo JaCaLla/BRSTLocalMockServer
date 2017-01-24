@@ -1,0 +1,164 @@
+{
+  "result": 0,
+  "response": {
+    "users": [
+      {
+        "accountUuid": "57a48c93-441c-4504-81c5-4fd1ac11a005",
+        "nickname": "gっh",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57a48f2f-385c-4f13-853d-4c6bac11a102",
+        "nickname": "mike",
+        "picture": "facebook",
+        "pictureUrl": {
+          "facebook": "https://preprod.nbapp.nestle.jp/ngs/facebook/picture/10153"
+        },
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57bbecf9-2fc4-4479-87d6-659cac11a102",
+        "nickname": "Tama2013",
+        "picture": "P006",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57bbf002-dae0-4057-957f-659fac11a102",
+        "nickname": "K",
+        "picture": "twitter",
+        "pictureUrl": {
+          "twitter": "https://preprod.nbapp.nestle.jp/ngs/twitter/picture/10135"
+        },
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57bd049f-006c-4bc2-a7c6-4ee0ac11a102",
+        "nickname": "😃☔😃☀",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57bd07bb-77b4-4c8c-b23f-3d3fac11a005",
+        "nickname": "黒ひげ",
+        "picture": "P002",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57bd5f78-16a4-4eba-a330-4f51ac11a005",
+        "nickname": "Thunder2000",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57bd6b74-bcc4-4cf9-b431-5365ac11a005",
+        "nickname": "Slimshady1",
+        "picture": "P002",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57bd9fd3-d9ec-4758-be38-d861ac11a102",
+        "nickname": "バリスタくん1",
+        "picture": "P001",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57bda022-b22c-41d2-aa09-d86dac11a102",
+        "nickname": "バリスタくん2",
+        "picture": "P002",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57bfe8c1-d800-4bcc-87a2-c53eac11a005",
+        "nickname": "赤ひげ",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57c098c0-715c-4c9d-bdcd-a939ac11a005",
+        "nickname": "kishida",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57c5193c-3fd8-424b-a12d-093bac11a005",
+        "nickname": "Tama2004",
+        "picture": "P001",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57c62a18-e234-42f0-b14c-717eac11a005",
+        "nickname": "ねすかふえ",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57c68a57-d204-4e83-a458-37e8ac11a102",
+        "nickname": "tama",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57c7fadf-d730-4d5d-aa5f-cf4aac11a005",
+        "nickname": "101",
+        "picture": "P005",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57c8f081-5f90-4c2d-91a6-021fac11a102",
+        "nickname": "Slimshady2",
+        "picture": "P002",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57cd000f-a8cc-4b81-b9a7-1b26ac11a102",
+        "nickname": "tama2003",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57ceca38-3b6c-4127-b197-d858ac11a102",
+        "nickname": "Qwerty🤕",
+        "picture": "P006",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57cf7c05-42c0-4f91-9952-a429ac11a102",
+        "nickname": "Slimshady100",
+        "picture": "P002",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57d0b2f1-748c-4d4f-b61e-8f5eac11a102",
+        "nickname": "三宮",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57d0f312-a81c-47e5-864a-a160ac11a005",
+        "nickname": "SOtokyo",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57d1183a-72dc-4849-9cef-c397ac11a005",
+        "nickname": "たかひろ",
+        "picture": "P001",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57da15a8-003c-471b-9145-f904ac11a102",
+        "nickname": "KDDIエボルバ",
+        "picture": "default",
+        "location": "JP-27"
+      },
+      {
+        "accountUuid": "57dd3212-c23c-4694-a7ca-b0bfac11a005",
+        "nickname": "tama2",
+        "picture": "default",
+        "location": "JP-27"
+      }
+    ]
+  },
+  "currentTimestamp": 1485269936461
+}

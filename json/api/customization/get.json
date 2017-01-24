@@ -1,0 +1,22 @@
+{
+  "result": 0,
+  "response": {
+    "region": "JP",
+    "friend": true,
+    "cheers": true,
+    "reward": true,
+    "game": true,
+    "alarm": true,
+    "manual": true,
+    "news": true,
+    "cafeSearch": true,
+    "eShop": true,
+    "tutorial": true,
+    "userId": true,
+    "notifyDeviceAlert": true,
+    "facebook": true,
+    "twitter": true,
+    "line": true
+  },
+  "currentTimestamp": 1485269064043
+}

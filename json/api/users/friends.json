@@ -1,0 +1,23 @@
+{
+  "result": 0,
+  "response": {
+    "users": [
+      {
+        "accountUuid": "57bbecf9-2fc4-4479-87d6-659cac11a102",
+        "nickname": "Tama2013",
+        "picture": "P006",
+        "brewEmoticonId": "E012",
+        "brewTimestamp": 1477551857915
+      },
+      {
+        "accountUuid": "57bda022-b22c-41d2-aa09-d86dac11a102",
+        "nickname": "バリスタくん2",
+        "picture": "P002",
+        "brewEmoticonId": null,
+        "brewTimestamp": 1472771910173
+      }
+    ],
+    "total": 2
+  },
+  "currentTimestamp": 1485269605051
+}

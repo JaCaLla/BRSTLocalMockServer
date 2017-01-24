@@ -1,0 +1,85 @@
+{
+  "result": 0,
+  "response": {
+    "defaultRecipes": [
+      {
+        "machineType": "TAMA2",
+        "coffeeType": "Espresso",
+        "taste": 2,
+        "water": 80,
+        "jet": 0
+      },
+      {
+        "machineType": "TAMA2",
+        "coffeeType": "Lungo",
+        "taste": 2,
+        "water": 140,
+        "jet": 0
+      },
+      {
+        "machineType": "TAMA2",
+        "coffeeType": "Xlungo",
+        "taste": 3,
+        "water": 210,
+        "jet": 0
+      },
+      {
+        "machineType": "TAMA2",
+        "coffeeType": "Cappuccino",
+        "taste": 2,
+        "water": 80,
+        "jet": 60
+      },
+      {
+        "machineType": "TAMA2",
+        "coffeeType": "Latte",
+        "taste": 2,
+        "water": 130,
+        "jet": 30
+      }
+    ],
+    "customRecipes": [
+      {
+        "machineType": "TAMA2",
+        "slotNo": 1,
+        "name": "Superexpress",
+        "coffeeType": "Lungo",
+        "taste": 3,
+        "water": 210,
+        "jet": 0,
+        "isActive": true,
+        "revision": 1483457697142
+      },
+      {
+        "machineType": "TAMA2",
+        "slotNo": 2,
+        "name": "Cafe 2",
+        "coffeeType": "Latte",
+        "taste": 3,
+        "water": 170,
+        "jet": 30,
+        "isActive": true,
+        "revision": 1484577452879
+      },
+      {
+        "machineType": "TAMA2",
+        "slotNo": 3,
+        "isActive": false,
+        "revision": 1481265538153
+      },
+      {
+        "machineType": "TAMA2",
+        "slotNo": 4,
+        "isActive": false,
+        "revision": 1481265540784
+      },
+      {
+        "machineType": "TAMA2",
+        "slotNo": 5,
+        "isActive": false,
+        "revision": 0
+      }
+    ]
+  },
+  "currentTimestamp": 1485270406506
+}

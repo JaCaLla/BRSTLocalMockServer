@@ -28,6 +28,26 @@ var beacons = require('./beacons.js');
 beacons.list(app);
 beacons.rssi(app);
 
+var amuse = require('./amuse.js');
+amuse.login(app);
+
+var settings = require('./settings.js');
+settings.get(app);
+
+var customization = require('./customization');
+customization.get(app);
+
+var users = require('./users');
+users.friends(app);
+users.cheers(app);
+users.ranking(app);
+
+var recipes = require('./recipes');
+recipes.list(app);
+
+var points = require('./points');
+points.get(app);
+
 var brews = require('./brews.js');
 brews.create(app);
 
@@ -44,10 +64,12 @@ app.get('*', function(req, res){
 });
 
 app.post('*', function(req, res){
+   console.log("UNDEFINED POST MEHTOD ----------------------------------------------------------------------")
+   console.log("URL-PATH:"+req.url);
+   //console.log("HEADERS:"+JSON.stringify(req.headers));
+   console.log("BODY:"+JSON.stringify(req.body));
 
     var response = "{\"result\": -2, \"message\": \"Unkown path "+ req.url + "\"}";
-
-    console.log(response);
     res.status(404).send(response);
 });
 

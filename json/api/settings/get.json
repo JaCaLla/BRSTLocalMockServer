@@ -1,0 +1,22 @@
+{
+  "result": 0,
+  "response": {
+    "accountUuid": "5789cde9-2de0-426b-a758-bdc8ac11a102",
+    "nickname": "Baristakun",
+    "picture": "twitter",
+    "picturePublic": true,
+    "notifyDeviceAlert": true,
+    "backup": "{\"alarms\":[{\"id\":4,\"hour\":12,\"minute\":7,\"label\":\"\",\"repeat\":0,\"snooze\":0,\"audioId\":\"la_figura.mp3\",\"enabled\":false,\"lastupdate\":1483523740702},{\"id\":6,\"hour\":10,\"minute\":45,\"label\":\"Test\",\"repeat\":2,\"snooze\":5,\"audioId\":\"lala_smile.mp3\",\"enabled\":false,\"lastupdate\":1483523745405}],\"revision\":1483523975065}",
+    "userId": "jeanseb01c",
+    "facebookConnected": false,
+    "facebookPublic": false,
+    "twitterConnected": true,
+    "twitterPublic": false,
+    "lineConnected": false,
+    "linePublic": false,
+    "line": {
+      "id": null
+    }
+  },
+  "currentTimestamp": 1485268700365
+}

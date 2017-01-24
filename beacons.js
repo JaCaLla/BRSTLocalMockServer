@@ -13,8 +13,8 @@ module.exports.list = function (app) {
 module.exports.rssi = function (app) { 
     app.post("/api/beacons/rssi", function(req, res) {
 
-    console.log(req.body);
-    console.log(req.headers);
+    // console.log(JSON.stringify(req.body));
+    // console.log(req.headers);
     
     fileUtils.sendFile(req.originalUrl, res);
 });
