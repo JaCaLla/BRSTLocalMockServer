@@ -1,0 +1,23 @@
+{
+  "result": 0,
+  "response": {
+    "beacons": [
+      {
+        "uuid": "CAFE6DC7-EB27-4F99-A9A0-7190D6E3A1EF",
+        "range": [
+          {
+            "major": {
+              "from": 100,
+              "to": 100
+            },
+            "minor": {
+              "from": 28801,
+              "to": 29100
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "currentTimestamp": 1485263473357
+}

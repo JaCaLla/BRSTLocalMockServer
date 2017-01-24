@@ -4,7 +4,8 @@
 	"description": "",
 	"order": [
 		"048008a1-c1f2-f7d2-5978-d96183b09469",
-		"3d11f629-f2e1-9c29-a7c6-371562cad74f"
+		"3d11f629-f2e1-9c29-a7c6-371562cad74f",
+		"5690883a-21d6-fb01-32aa-6724e44b9ce1"
 	],
 	"folders": [],
 	"timestamp": 1485256464665,
@@ -46,6 +47,27 @@
 			"description": "",
 			"descriptionFormat": "html",
 			"time": 1485262940595,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": ""
+		},
+		{
+			"id": "5690883a-21d6-fb01-32aa-6724e44b9ce1",
+			"headers": "x-barista-auth: b127c159bf3175173b9a6f031ef3ae461bf89dea23620b9392e144ac847370a0\n",
+			"url": "http://localhost:3000/api/beacons/list",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "e31fcc76-8ad1-3214-de73-04d63deec463",
+			"data": [],
+			"dataMode": "raw",
+			"name": "beacons/list",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1485263832126,
 			"version": 2,
 			"responses": [],
 			"tests": null,

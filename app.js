@@ -24,6 +24,9 @@ notifications.count(app);
 var machines = require('./machines.js');
 machines.list(app);
 
+var beacons = require('./beacons.js');
+beacons.list(app);
+
 var brews = require('./brews.js');
 brews.create(app);
 
