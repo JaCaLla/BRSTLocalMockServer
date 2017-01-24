@@ -21,6 +21,9 @@ app.use(bodyParser.urlencoded({
 var notifications = require('./notifications.js');
 notifications.count(app);
 
+var machines = require('./machines.js');
+machines.list(app);
+
 var brews = require('./brews.js');
 brews.create(app);
 

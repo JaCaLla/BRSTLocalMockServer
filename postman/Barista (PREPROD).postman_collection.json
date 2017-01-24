@@ -3,7 +3,8 @@
 	"name": "Barista (PREPROD)",
 	"description": "",
 	"order": [
-		"d0be1099-9a43-7441-4096-e166b9883cf8"
+		"d0be1099-9a43-7441-4096-e166b9883cf8",
+		"f7ea8ac4-de28-9e80-783c-168fee25d231"
 	],
 	"folders": [],
 	"timestamp": 1485255128870,
@@ -30,6 +31,26 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"rawModeData": "{\r     \"since\": 0\r}"
+		},
+		{
+			"id": "f7ea8ac4-de28-9e80-783c-168fee25d231",
+			"headers": "x-barista-auth: b127c159bf3175173b9a6f031ef3ae461bf89dea23620b9392e144ac847370a0\n",
+			"url": "https://preprod.nbapp.nestle.jp/ngs/api/machines/list",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485262951840,
+			"name": "machines/list",
+			"description": "",
+			"collectionId": "8e99ed12-d825-e43c-d667-cc6a08eb0726",
+			"responses": [],
+			"rawModeData": ""
 		}
 	]
 }

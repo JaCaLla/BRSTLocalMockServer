@@ -1,0 +1,71 @@
+{
+  "result": 0,
+  "response": {
+    "machines": [
+      {
+        "macAddress": "20:91:48:A0:A6:FA",
+        "serialNumber": "7070181400782JDH",
+        "machineId": "0000782JDH",
+        "machineType": "TAMA2",
+        "name": "XYZ"
+      },
+      {
+        "macAddress": "F0:C7:7F:0A:CA:14",
+        "serialNumber": "7070181400002032",
+        "machineId": "0020322JDH",
+        "machineType": "TAMA2",
+        "name": "バリスタアイ5"
+      },
+      {
+        "macAddress": "F0:C7:7F:0A:B5:28",
+        "serialNumber": "7070181400002037",
+        "machineId": "0020372JDH",
+        "machineType": "TAMA2",
+        "name": "バリスタアイ3"
+      },
+      {
+        "macAddress": "F0:C7:7F:5B:95:CD",
+        "serialNumber": "7070181400002035",
+        "machineId": "0020352JDH",
+        "machineType": "TAMA2",
+        "name": "Touctouc 🍺"
+      },
+      {
+        "macAddress": "F0:C7:7F:14:BF:D3",
+        "serialNumber": "7070181400001684",
+        "machineId": "0016842JDH",
+        "machineType": "TAMA2",
+        "name": "🐙"
+      },
+      {
+        "macAddress": "F0:C7:7F:5B:D1:38",
+        "serialNumber": "7070181400002066",
+        "machineId": "0020662JDH",
+        "machineType": "TAMA2",
+        "name": "バリスタアイ2"
+      },
+      {
+        "macAddress": "F0:C7:7F:14:B9:05",
+        "serialNumber": "7070181400002068",
+        "machineId": "0020682JDH",
+        "machineType": "TAMA2",
+        "name": "バリスタアイ1"
+      },
+      {
+        "macAddress": "F0:C7:7F:14:D7:D7",
+        "serialNumber": "7070181400001663",
+        "machineId": "0016632JDH",
+        "machineType": "TAMA2",
+        "name": "バリスタアイ8"
+      },
+      {
+        "macAddress": "5C:F8:21:DF:F0:34",
+        "serialNumber": "7070167800000364",
+        "machineId": "0003647JD",
+        "machineType": "TAMA2",
+        "name": "Surya"
+      }
+    ]
+  },
+  "currentTimestamp": 1485259413692
+}
