@@ -5,7 +5,8 @@
 	"order": [
 		"d0be1099-9a43-7441-4096-e166b9883cf8",
 		"f7ea8ac4-de28-9e80-783c-168fee25d231",
-		"6cf75ecc-94d1-ece8-8525-cc88c0b4edbf"
+		"6cf75ecc-94d1-ece8-8525-cc88c0b4edbf",
+		"72117e3e-92be-5e66-0c13-fad5e8946a47"
 	],
 	"folders": [],
 	"timestamp": 1485255128870,
@@ -32,6 +33,27 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"rawModeData": ""
+		},
+		{
+			"id": "72117e3e-92be-5e66-0c13-fad5e8946a47",
+			"headers": "x-barista-auth: b127c159bf3175173b9a6f031ef3ae461bf89dea23620b9392e144ac847370a0\n",
+			"url": "https://preprod.nbapp.nestle.jp/ngs/api/beacons/rssi",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "8e99ed12-d825-e43c-d667-cc6a08eb0726",
+			"data": [],
+			"dataMode": "raw",
+			"name": "beacons/rssi",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1485265172811,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n  \"userAgent\":{\n    \"os\" :\"iOS\",\n    \"lang\" : \"en\",\n    \"systemVersion\" : \"10.2\",\n    \"appId\" : \"jp.co.aplix.GlobalApp\",\n    \"model\" : \"x86_64\",\n    \"appVersion\" :\"1.1.0\",\n    \"buildNumber\" : \"1\",\n    \"locale\" : \"en_US\"\n  },\n  \"model\" : \"x86_64\"\n}"
 		},
 		{
 			"id": "d0be1099-9a43-7441-4096-e166b9883cf8",

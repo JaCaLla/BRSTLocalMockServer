@@ -5,7 +5,8 @@
 	"order": [
 		"048008a1-c1f2-f7d2-5978-d96183b09469",
 		"3d11f629-f2e1-9c29-a7c6-371562cad74f",
-		"5690883a-21d6-fb01-32aa-6724e44b9ce1"
+		"5690883a-21d6-fb01-32aa-6724e44b9ce1",
+		"6ea89af7-9467-d27f-4690-49636f3879a7"
 	],
 	"folders": [],
 	"timestamp": 1485256464665,
@@ -74,6 +75,27 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"rawModeData": ""
+		},
+		{
+			"id": "6ea89af7-9467-d27f-4690-49636f3879a7",
+			"headers": "x-barista-auth: b127c159bf3175173b9a6f031ef3ae461bf89dea23620b9392e144ac847370a0\n",
+			"url": "http://localhost:3000/api/beacons/rssi",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "e31fcc76-8ad1-3214-de73-04d63deec463",
+			"data": [],
+			"dataMode": "raw",
+			"name": "beacons/rssi",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1485265213825,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n  \"userAgent\":{\n    \"os\" :\"iOS\",\n    \"lang\" : \"en\",\n    \"systemVersion\" : \"10.2\",\n    \"appId\" : \"jp.co.aplix.GlobalApp\",\n    \"model\" : \"x86_64\",\n    \"appVersion\" :\"1.1.0\",\n    \"buildNumber\" : \"1\",\n    \"locale\" : \"en_US\"\n  },\n  \"model\" : \"x86_64\"\n}"
 		}
 	]
 }

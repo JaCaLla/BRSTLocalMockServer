@@ -1,0 +1,9 @@
+{
+  "result": 0,
+  "response": {
+    "immediate": -50,
+    "near": -70,
+    "far": -90
+  },
+  "currentTimestamp": 1485265245399
+}

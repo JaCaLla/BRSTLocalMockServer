@@ -9,3 +9,13 @@ module.exports.list = function (app) {
     fileUtils.sendFile(req.originalUrl, res);
 });
 };
+
+module.exports.rssi = function (app) { 
+    app.post("/api/beacons/rssi", function(req, res) {
+
+    console.log(req.body);
+    console.log(req.headers);
+    
+    fileUtils.sendFile(req.originalUrl, res);
+});
+};

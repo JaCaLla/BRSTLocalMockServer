@@ -26,6 +26,7 @@ machines.list(app);
 
 var beacons = require('./beacons.js');
 beacons.list(app);
+beacons.rssi(app);
 
 var brews = require('./brews.js');
 brews.create(app);
