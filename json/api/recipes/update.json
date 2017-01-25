@@ -1,0 +1,15 @@
+{
+  "result": 0,
+  "response": {
+    "machineType": "TAMA2",
+    "slotNo": 1,
+    "name": "Superexpress",
+    "coffeeType": "Lungo",
+    "taste": 3,
+    "water": 210,
+    "jet": 0,
+    "isActive": true,
+    "revision": 1485343434514
+  },
+  "currentTimestamp": 1485343843637
+}

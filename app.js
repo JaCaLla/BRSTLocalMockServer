@@ -51,6 +51,7 @@ twitter.login(app);
 
 var recipes = require('./js/recipes');
 recipes.list(app);
+recipes.update(app);
 
 var points = require('./js/points');
 points.get(app);

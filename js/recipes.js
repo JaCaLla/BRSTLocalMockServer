@@ -10,3 +10,9 @@ module.exports.list = function (app) {
 });
 };
 
+module.exports.update = function (app) { 
+    app.post("/api/recipes/update", function(req, res) {
+
+    fileUtils.sendJSONFile(req.originalUrl, res);
+});
+};
