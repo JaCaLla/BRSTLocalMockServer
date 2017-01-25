@@ -1,2 +1,1 @@
 # BRSTLocalMockServer
-## afornes@afornes.es
