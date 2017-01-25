@@ -39,6 +39,7 @@ var users = require('./js/users');
 users.friends(app);
 users.cheers(app);
 users.ranking(app);
+users.get(app);
 
 var recipes = require('./js/recipes');
 recipes.list(app);

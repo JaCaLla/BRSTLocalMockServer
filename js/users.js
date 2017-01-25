@@ -24,3 +24,10 @@ module.exports.ranking = function (app) {
     fileUtils.sendFile(req.originalUrl, res);
 });
 };
+
+module.exports.get = function (app) { 
+    app.post("/api/users/get", function(req, res) {
+
+    fileUtils.sendFile(req.originalUrl, res);
+});
+};

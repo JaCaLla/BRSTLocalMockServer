@@ -1,0 +1,21 @@
+{
+  "result": 0,
+  "response": {
+    "accountUuid": "5789cde9-2de0-426b-a758-bdc8ac11a102",
+    "nickname": "Baristakun",
+    "picture": "twitter",
+    "pictureUrl": {
+      "twitter": "https://preprod.nbapp.nestle.jp/ngs/twitter/picture/10122"
+    },
+    "location": "JP-27",
+    "isAmbassador": true,
+    "twitter": {
+      "url": "https://twitter.com/intent/user?user_id=765349687356522501"
+    },
+    "friendsCount": 2,
+    "cheersCount": 13,
+    "ranking": 4,
+    "relationship": 0
+  },
+  "currentTimestamp": 1485331340505
+}
