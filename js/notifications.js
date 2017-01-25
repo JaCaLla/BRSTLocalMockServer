@@ -20,3 +20,9 @@ module.exports.count = function (app) {
     fileUtils.sendFile(req.originalUrl, res);
 });
 };
+
+module.exports.list = function (app) {
+    app.post("/api/notifications/list", function(req, res){
+        fileUtils.sendFile(req.originalUrl, res);
+    });
+};

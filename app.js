@@ -3,7 +3,7 @@
 var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser')
-var fileUtils = require('./fileUtils.js');
+var fileUtils = require('./js/fileUtils.js');
 
 var app = express();
 
@@ -18,46 +18,47 @@ app.use(bodyParser.urlencoded({
 }))
 
 
-var notifications = require('./notifications.js');
-notifications.count(app);
 
-var machines = require('./machines.js');
+var machines = require('./js/machines.js');
 machines.list(app);
 
-var beacons = require('./beacons.js');
+var beacons = require('./js/beacons.js');
 beacons.list(app);
 beacons.rssi(app);
 
-var amuse = require('./amuse.js');
+var amuse = require('./js/amuse.js');
 amuse.login(app);
 
-var settings = require('./settings.js');
+var settings = require('./js/settings.js');
 settings.get(app);
 
-var customization = require('./customization');
+var customization = require('./js/customization');
 customization.get(app);
 
-var users = require('./users');
+var users = require('./js/users');
 users.friends(app);
 users.cheers(app);
 users.ranking(app);
 
-var recipes = require('./recipes');
+var recipes = require('./js/recipes');
 recipes.list(app);
 
-var points = require('./points');
+var points = require('./js/points');
 points.get(app);
 
-var brews = require('./brews.js');
+var brews = require('./js/brews.js');
 brews.create(app);
 
-var cafes = require('./cafes.js');
+var cafes = require('./js/cafes.js');
 cafes.list(app);
 
-var cheers = require('./cheers.js');
+var cheers = require('./js/cheers.js');
 cheers.create(app);
 cheers.list(app);
 
+var notifications = require('./js/notifications.js');
+notifications.count(app);
+notifications.list(app);
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){
   res.send('what-get???', 404);
@@ -74,5 +75,5 @@ app.post('*', function(req, res){
 });
 
 app.listen(3000, function() {
-    console.log('Example app listening on port 3000!');
+    console.log('Barista Mock Server listening on port 3000!');
 });

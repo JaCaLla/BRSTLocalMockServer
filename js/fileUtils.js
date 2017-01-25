@@ -2,16 +2,16 @@
 
 var fs = require('fs');
 
-var jsonFolderPath = "/json";
+var jsonFolderPath = "/../json";
 
 module.exports.sendFile = function (originalUrl, res) {
 
     var filePath = __dirname + jsonFolderPath + originalUrl + ".json";
 
-   // console.log("filepath:" + filePath);
+    //console.log("filepath:" + filePath);
 
     fs.readFile(filePath, 'utf8', function(err, data) {
-    //    console.log(data);
+       // console.log(data);
         res.send(JSON.parse(data));
     });
 };

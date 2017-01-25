@@ -1,0 +1,35 @@
+{
+  "result": 0,
+  "response": {
+    "notifications": [
+      {
+        "notificationId": 5330,
+        "notificationType": "Ranking",
+        "timestamp": 1483146002907,
+        "args": {
+          "ranking": 2
+        }
+      },
+      {
+        "notificationId": 5329,
+        "notificationType": "RankingLocation",
+        "timestamp": 1483146002903,
+        "args": {
+          "ranking": 2,
+          "location": "JP-27"
+        }
+      },
+      {
+        "notificationId": 5328,
+        "notificationType": "RankingFriend",
+        "timestamp": 1483146002897,
+        "args": {
+          "ranking": 1,
+          "friendsCount": 2
+        }
+      }
+    ],
+    "hasNext": false
+  },
+  "currentTimestamp": 1485269880538
+}
