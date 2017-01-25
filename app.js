@@ -75,6 +75,9 @@ var links = require('./js/links.js');
 links.troubleshooting(app);
 links.news_latest(app);
 
+var maps = require('./js/maps.js');
+maps.home(app);
+maps.cheers(app);
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){

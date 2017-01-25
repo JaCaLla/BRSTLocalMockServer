@@ -1,0 +1,645 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        * {
+          padding: 0;
+          margin: 0;
+        }
+        html, body, #map-canvas {
+          width: 100%;
+          height: 100%;
+        }
+        svg.markers {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          overflow: visible;
+        }
+    </style>
+<!-- env:[preprod] start -->
+<!-- env:[preprod] end -->
+
+
+</head>
+
+<body>
+    <div id="map-canvas"></div>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyA6pN-GJ8TcMw_RxiV0rNshhl2gs0qlQ24"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script type="text/javascript" src="/ngs/js/unified.js"></script>
+    <script type="text/javascript">
+            'use strict';
+
+            /**
+             * CHEERSマップ表示用Pane
+             *
+             * [機能]
+             * 親Frameから渡されたCheers情報をGoogle Map上に表示して一定間隔で要素を更新し続ける
+             * Cheersアイコンがタップされると、そのCheers情報を親Frameへ返信する
+             * Frame間送受信に以下のmessageフォーマット(JSON)を定義する
+             *
+             * {
+             *   type: 
+                      <message-type>  - messageタイプ
+             *   data: 
+                          <object|array>  - messageタイプ毎に定義されたデータ
+             * }
+             *
+             * [条件]
+             * この画面は特定の画像リソースを持たない。アイコン画像など必要なリソースはdataURL形式で渡す必要がある。
+             * この画面は特定のRegionを前提としない。Markerの位置情報は緯度経度形式にした状態で渡す必要がある。
+             */
+
+            // @const
+            /**
+             * [IN] 表示するMarker一覧を設定する(既に設定されている一覧は上書きされる)
+             * [dataフィールド定義]
+             * data: {
+             *   markers: [{
+             *     id: 
+                              <string>,      -- accountUuid等一意な値
+             *     image: 
+                                  <data-url>, -- Markerに表示するImage
+             *     location: {        -- 地図上に配置する緯度経度
+             *       lat: 
+                                      <latitude>,
+             *       lng: 
+                                          <longitude>
+             *     },
+             *     data: 
+                                              <object>     -- 任意のデータ(Marker click時に返信されるデータ)
+             *   }],
+             *   limit: 
+                                                  <number>,     -- 表示するMarker数の上限(option)
+             *   strictBounds: {      -- 表示を制限する矩形領域(option)
+             *     sw: {
+             *       lat: 
+                                                      <latitude>,
+             *       lng: 
+                                                          <longitude>
+             *     },
+             *     ne: {
+             *       lat: 
+                                                              <latitude>,
+             *       lng: 
+                                                                  <longitude>
+             *     }
+             *   },
+             *   mapOption: 
+                                                                      <object>  -- defaultのMap option
+             * })
+             */
+            var MESSAGE_TYPE_SET_MARKERS = 'set-markers';
+
+            /**
+             * [IN] 表示するMarker一覧に追加する (Marker数の上限を超えたものは順次削除される)
+             * [dataフィールド定義]
+             * data: {
+             *   markers: [{
+             *     id: 
+                                                                          <string>,      -- accountUuid等一意な値
+             *     image: 
+                                                                              <data-url>, -- Markerに表示するImage
+             *     location: {        -- 地図上に配置する緯度経度
+             *       lat: 
+                                                                                  <latitude>,
+             *       lng: 
+                                                                                      <longitude>
+             *     },
+             *     data: 
+                                                                                          <object>     -- 任意のデータ(Marker click時に返信されるデータ)
+             *   }]
+             * })
+             */
+            var MESSAGE_TYPE_PUT_MARKERS = 'put-markers';
+
+            /**
+             * [IN] 指定されたMarkerを画面から削除する（存在しない場合は無視される）
+             * [dataフィールド定義]
+             * data: {
+             *  markers: [{
+             *    id: 
+                                                                                              <string>     -- accountUuid等一意な値
+             *  }]
+             * }
+             */
+            var MESSAGE_TYPE_DEL_MARKERS = 'del-markers';
+
+            /**
+             * [OUT] Markerがクリックされた
+             * [dataフィールド定義]
+             * data: 
+                                                                                                  <object>
+             */
+            var MESSAGE_TYPE_MARKER_SELECTED = 'marker-selected';
+
+            // @const for MAP
+            var CHEERS_MAP_DEFAULT_CENTER = [36.2586, 137.685]; // Map中心座標(日本地図)
+            var CHEERS_MAP_DEFAULT_ZOOM = 5;                  // Map画像のズームレベル
+            var CHEERS_MAP_MIN_ZOOM = 4;                  // ズームレベルの下限
+            var CHEERS_MAP_MAX_ZOOM = 8;                  // ズームレベルの上限
+
+            // @variables
+            var parent = {};
+
+            var map;        // マップインスタンス(Map)
+            var mapOverlay; // マップOverlay(OverlayView)
+            var mapZoom = CHEERS_MAP_DEFAULT_ZOOM;    // マップ画像ズームレベル
+            var mapOption = {
+                zoomControl: false,
+                mapTypeControl: false,
+                streetViewControl: false,
+                center: new google.maps.LatLng(CHEERS_MAP_DEFAULT_CENTER[0], CHEERS_MAP_DEFAULT_CENTER[1]),
+                zoom: mapZoom,
+                minZoom: CHEERS_MAP_MIN_ZOOM,
+                maxZoom: CHEERS_MAP_MAX_ZOOM
+            };
+
+            // icon枠 (画面サイズに応じて変更する場合は初期化時にこのパラメータを操作する)
+            var icon = {
+                w: 50,      // width
+                h: 50,      // height
+                rx: 20,      // border-radius 40%
+                ry: 20,      // border-radius 40%
+                px: 2,       // padding-x
+                py: 2,       // padding-y
+                fence: 30,   // 中心からの重複判定距離
+                distance: 6  // icon間で確保する距離
+            };
+
+            $(function () {
+                initialize();
+            });
+
+            /**
+             * MAP初期化
+             */
+            function initialize() {
+                map = new google.maps.Map(document.getElementById('map-canvas'), mapOption);
+                mapOverlay = new CheersOverlay();
+                mapOverlay.setMap(map);
+                google.maps.event.addListenerOnce(map, 'tilesloaded', onMapInitialized);
+            }
+
+            /**
+             * Mapロード後の処理(初回のみ)
+             */
+            function onMapInitialized() {
+                // Google logoのaタグ処理など
+                console.debug('onMapInitialized');
+                $('#map-canvas a').click(function () {
+                    var $anchor = $(this);
+                    var target = $anchor.attr('target');
+                    if (target == '_blank' || target == '_new') {
+                        try { nestle.system.launchApp({ uri: $anchor.attr('href') }); } catch (e) { console.error(e); }
+                    }
+                    return false;
+                });
+            }
+
+            /**
+             * Markerクリック処理
+             */
+            function onMarkerClicked(marker) {
+                if (!parent.source) {
+                    console.error('no source:', parent);
+                    return;
+                }
+                var message = {
+                    type: MESSAGE_TYPE_MARKER_SELECTED,
+                    data: marker.data
+                };
+                try {
+                    message = JSON.stringify(message);
+                    parent.source.postMessage(message, '*');
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+
+            /**
+             * 受信Message処理
+             */
+            function onMessageReceived(event) {
+                console.debug('received event', event);
+                try {
+                    if (event.data) {
+                        var message = JSON.parse(event.data);
+                        var data = message.data || {};
+                        console.log('message', message);
+                        switch (message.type) {
+                            case MESSAGE_TYPE_SET_MARKERS:
+                                processSetMarkers(message.data);
+                                break;
+                            case MESSAGE_TYPE_PUT_MARKERS:
+                                processPutMarkers(message.data);
+                                break;
+                            case MESSAGE_TYPE_DEL_MARKERS:
+                                processDelMarkers(message.data);
+                                break;
+                            default:
+                                return;
+                        }
+                    }
+                    if (event.source) {
+                        parent.source = event.source;
+                        parent.origin = event.origin;
+                    } else {
+                        console.error('event source not available');
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+
+            function processSetMarkers(data) {
+                console.debug('[MAP] processSetMarkers:', data);
+                var option = data.mapOption || {};
+                if (option.center) {
+                    option.center = toLatLng(option.center);
+                }
+                mapOption = $.extend(mapOption, option);
+                console.debug('[MAP] setOptions:', mapOption);
+                map.setOptions(mapOption);
+                if (data.limit) {
+                    mapOverlay.setMarkerLimit(data.limit);
+                }
+                if (data.strictBounds) {
+                    var sw = toLatLng(data.strictBounds.sw);
+                    var ne = toLatLng(data.strictBounds.ne);
+                    if (sw && ne) {
+                        mapOverlay.setStrictBounds(new google.maps.LatLngBounds(sw, ne));
+                    }
+                }
+                if (Array.isArray(data.markers)) {
+                    mapOverlay.setMarkers(data.markers);
+                }
+            }
+
+            function processPutMarkers(data) {
+                if (Array.isArray(data.markers)) {
+                    mapOverlay.putMarkers(data.markers);
+                }
+            }
+
+            function processDelMarkers(data) {
+                if (Array.isArray(data.markers)) {
+                    mapOverlay.delMarkers(data.markers);
+                }
+            }
+
+            /**
+             * カスタムlocationデータをgoogle.maps.LatLngにして返す
+             * @param {lat:
+                                                                                                      <number>, lng:
+                                                                                                          <number>}:location
+             * @return google.maps.LatLng  (不正データの場合はnull)
+             */
+            function toLatLng(location) {
+                try {
+                    return new google.maps.LatLng(location.lat, location.lng);
+                } catch (e) {
+                    console.error(e);
+                }
+                return null;
+            }
+
+            // メッセージ受信イベントリスナ
+            window.addEventListener("message", onMessageReceived);
+
+            /**
+             * Marker表示用のオーバーレイ
+             */
+            var CheersOverlay = function () {
+                this.bounds;
+                this.zoom;
+                this.markerLimit = 5;
+                this.strictBounds;
+
+                // d3
+                this.force;
+                this.nodes = [];
+                this.node;
+                this.svg;
+            }
+            CheersOverlay.prototype = new google.maps.OverlayView();
+
+            /**
+             * Marker上限を設定する
+             * @param {number} limit
+             */
+            CheersOverlay.prototype.setMarkerLimit = function (limit) {
+                this.markerLimit = limit;
+            };
+
+            /**
+             * Mapの表示制限矩形を設定する
+             * @param google.maps.LatLngBounds
+             */
+            CheersOverlay.prototype.setStrictBounds = function (bounds) {
+                if (bounds instanceof google.maps.LatLngBounds) {
+                    this.strictBounds = bounds;
+                }
+            }
+
+            /**
+             * Marker一覧を設定する
+             * 直前のMarkerは全て破棄され、Map表示矩形が更新される
+             * @param {Array
+                                                                                                              <object>} markers
+             */
+            CheersOverlay.prototype.setMarkers = function (markers) {
+                console.debug('[MAP] setMarkers', markers);
+                if (!Array.isArray(markers)) {
+                    return;
+                }
+                markers = markers.filter(function (marker) {
+                    return (marker.id && typeof (marker.location) == 'object');
+                });
+                if (this.markerLimit < markers.length) {
+                    markers = markers.slice(this.markerLimit * (-1));
+                }
+                var bounds = new google.maps.LatLngBounds();
+                var nodes = this.nodes;
+                nodes.splice(0); // clear nodes
+                markers.forEach(function (marker) {
+                    nodes.push({
+                        marker: marker
+                    });
+                    bounds.extend(new google.maps.LatLng(marker.location.lat, marker.location.lng));
+                });
+
+                // 表示領域リセット
+                this.bounds = bounds;
+                this.svg.selectAll('.node').remove();
+                if (!bounds.isEmpty()) {
+                    this.getMap().fitBounds(bounds);
+                }
+                this.draw();
+                console.debug('[MAP] nodes:', nodes);
+            };
+
+            /**
+             * Markerを追加する
+             * 現在表示中のMap矩形は更新しない
+             * @param {Array
+                                                                                                                  <object>} markers
+             */
+            CheersOverlay.prototype.putMarkers = function (markers) {
+                console.debug('[MAP] putMarkers', markers);
+                if (!Array.isArray(markers)) {
+                    return;
+                }
+                var bounds = new google.maps.LatLngBounds();
+                var nodes = this.nodes;
+                markers = markers.filter(function (marker) {
+                    // idが重複するmarkerは除外
+                    for (var i = 0; i < nodes.length; i++) {
+                        if (nodes[i].marker.id == marker.id) {
+                            return false;
+                        }
+                    }
+                    return (marker.id && typeof (marker.location) == 'object');
+                });
+                if (this.markerLimit < (nodes.length + markers.length)) {
+                    var remains = this.markerLimit - markers.length;
+                    if (remains <= 0) {
+                        markers = markers.slice(this.markerLimit * (-1));
+                        nodes.splice(0);
+                    } else {
+                        nodes.splice(0, nodes.length - remains);
+                    }
+                }
+                markers.forEach(function (marker) {
+                    nodes.push({
+                        marker: marker
+                    });
+                });
+                nodes.forEach(function (node) {
+                    bounds.extend(new google.maps.LatLng(node.marker.location.lat, node.marker.location.lng));
+                });
+
+                this.bounds = bounds;
+                this.draw();
+                console.debug('[MAP] nodes:', nodes);
+            };
+
+            /**
+             * Markerを削除する
+             * 現在表示中のMap矩形は更新しない
+             * @param {Array
+                                                                                                                      <object>} markers
+             */
+            CheersOverlay.prototype.delMarkers = function (markers) {
+                console.debug('[MAP] delMarkers', markers);
+                if (!Array.isArray(markers)) {
+                    return;
+                }
+                var nodes = this.nodes;
+                var nodeSize = nodes.length;
+                if (nodeSize) {
+                    var ids = markers.map(function (marker) {
+                        return marker.id;
+                    });
+                    for (var i = nodeSize - 1; 0 <= i; i--) {
+                        if (0 <= ids.indexOf(nodes[i].marker.id)) {
+                            nodes.splice(i, 1);
+                        }
+                    }
+                    if (nodeSize != nodes.length) {
+                        this.draw();
+                        console.debug('[MAP] nodes:', nodes);
+                    }
+                }
+            }
+
+            /**
+             * Map矩形変更イベント処理
+             */
+            CheersOverlay.prototype.onBoundsChanged = function () {
+                if (this.strictBounds && !this.strictBounds.isEmpty()) {
+                    // If strictBounds is set, check map center in bounds.
+                    var map = this.getMap();
+                    var strictBounds = this.strictBounds;
+                    var center = map.getCenter();
+                    if (strictBounds.contains(center)) {
+                        return;
+                    }
+                    var lat = center.lat();
+                    var lng = center.lng();
+                    var latMin = strictBounds.getSouthWest().lat();
+                    var latMax = strictBounds.getNorthEast().lat();
+                    var lngMin = strictBounds.getSouthWest().lng();
+                    var lngMax = strictBounds.getNorthEast().lng();
+                    if (lng < lngMin) { lng = lngMin; }
+                    if (lngMax < lng) { lng = lngMax; }
+                    if (lat < latMin) { lat = latMin; }
+                    if (latMax < lat) { lat = latMax; }
+                    map.panTo(new google.maps.LatLng(lat, lng));
+                } else
+                    if (this.bounds && !this.bounds.isEmpty()) {
+                        // Fit to bounds that contains all markers.
+                        var map = this.getMap();
+                        if (!this.bounds.intersects(map.getBounds())) {
+                            map.fitBounds(this.bounds);
+                        }
+                    }
+            };
+
+            /**
+             * [Override]
+             */
+            CheersOverlay.prototype.onAdd = function () {
+                console.debug('[MAP] onAdd');
+                var self = this;
+                // event handler
+                this.getMap().addListener('bounds_changed', function () { self.onBoundsChanged() });
+
+                // d3 settings
+                var nodes = this.nodes;
+                var svg = d3.select(this.getPanes().overlayMouseTarget).append('svg').attr('class', 'markers');
+                svg.append('clipPath')
+                    .attr('id', 'clip-circle')
+                    .append('circle')
+                    .attr({ cx: icon.w / 2, cy: icon.h / 2, r: icon.h / 2 - icon.px })
+
+                var TickUtil = {
+                    tick: function (e) {
+                        svg.selectAll('.node')
+                            .each(TickUtil.gravity(.2 * e.alpha))
+                            .each(TickUtil.collide(.5))
+                            .attr('transform', function (d) { return 'translate(' + d.x + ',' + d.y + ')'; });
+                    },
+                    gravity: function (alpha) {
+                        return function (d) {
+                            d.x += (d.gravityPoint.x - (d.x + icon.w / 2)) * alpha;
+                            d.y += (d.gravityPoint.y - (d.y + icon.h / 2)) * alpha;
+                        };
+                    },
+                    collide: function (alpha) {
+                        var quadtree = d3.geom.quadtree(nodes);
+                        return function (d) {
+                            var r = icon.fence + icon.distance,
+                                nx1 = d.x - r,
+                                nx2 = d.x + r,
+                                ny1 = d.y - r,
+                                ny2 = d.y + r;
+                            quadtree.visit(function (quad, x1, y1, x2, y2) {
+                                if (quad.point && (quad.point !== d)) {
+                                    var x = d.x - quad.point.x,
+                                        y = d.y - quad.point.y,
+                                        l = Math.sqrt(x * x + y * y),
+                                        r = icon.fence * 2 + icon.distance;
+                                    if (l < r) {
+                                        l = (l - r) / l * alpha;
+                                        d.x -= x *= l;
+                                        d.y -= y *= l;
+                                        quad.point.x += x;
+                                        quad.point.y += y;
+                                    }
+                                }
+                                return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+                            });
+                        };
+                    }
+                }
+
+                var force = d3.layout.force()
+                    .nodes(nodes)
+                    .gravity(0)
+                    .charge(0)
+                    .on('tick', TickUtil.tick);
+
+                this.svg = svg;
+                this.force = force;
+            };
+
+            /**
+             * [Override]
+             */
+            CheersOverlay.prototype.draw = function () {
+                console.debug('[MAP] draw');
+                var map = this.getMap();
+                var proj = this.getProjection();
+                var nodes = this.nodes;
+                // 位置調整
+                nodes.forEach(function (node) {
+                    var location = node.marker.location;
+                    var latLng = new google.maps.LatLng(location.lat, location.lng);
+                    node.gravityPoint = proj.fromLatLngToDivPixel(latLng);
+                });
+                this._drawCheers();
+                this._start();
+            };
+
+            /**
+             * Marker描画処理
+             */
+            CheersOverlay.prototype._drawCheers = function (animate) {
+                console.debug('_drawCheers: animate=' + animate);
+                var node = this.node;
+                var svg = this.svg;
+
+                node = svg.selectAll('.node').data(this.nodes, function (d) { return d.marker.id; });
+
+                var nodeG = node.enter()
+                    .append('svg:g')
+                    .attr('class', 'node')
+                    .attr('data-id', function (d) { return d.marker.id; })
+                    .on('click', function (d) { onMarkerClicked(d.marker) });
+                // 装飾枠
+                nodeG.append('rect')
+                    .attr({ width: icon.w, height: icon.h, rx: icon.rx, ry: icon.ry })
+                    .style('fill', '#ffffff');
+                // profile画像背景色
+                nodeG.append('circle')
+                    .attr({ cx: icon.w / 2, cy: icon.h / 2, r: icon.w / 2 - icon.px })
+                    .style('fill', '#eeeeee');
+                // profile画像(clip)
+                nodeG.append('image')
+                    .attr('xlink:href', function (d) { return d.marker.image; })
+                    .attr({ x: icon.px, y: icon.py, width: icon.w - icon.px * 2, height: icon.h - icon.py * 2 })
+                    .attr('clip-path', 'url(#clip-circle)')
+                    .style('fill', '#eeeeee');
+                // 追加時エフェクト
+                nodeG.style('opacity', 0)
+                    .transition()
+                    .duration(1000)
+                    .style('opacity', 1);
+                // 削除時エフェクト
+                node.exit()
+                    .transition()
+                    .duration(1000)
+                    .style('opacity', 0)
+                    .remove();
+            };
+
+            /**
+             * Marker位置更新の開始
+             * @param {boolean} animate
+             */
+            CheersOverlay.prototype._start = function (animate) {
+                console.debug('_start animate:' + animate);
+                var force = this.force;
+                force.start();
+                if (!animate) {
+                    var k = 0;
+                    while ((force.alpha() > 1e-2) & k < 150) {
+                        force.tick();
+                        k++;
+                    };
+                    console.debug('force stop with alpha=' + force.alpha());
+                    force.stop();
+                }
+            }
+
+
+        </script>
+</body>
+
+</html>
