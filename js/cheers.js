@@ -20,7 +20,7 @@ module.exports.create = function (app) {
         return  res.send("{\"result\": -1}");
     }
 
-    fileUtils.sendFile(req.originalUrl, res);
+    fileUtils.sendJSONFile(req.originalUrl, res);
 });
 };
 
@@ -49,6 +49,6 @@ module.exports.list = function (app) {
     }
 
 
-    fileUtils.sendFile(req.originalUrl, res);
+    fileUtils.sendJSONFile(req.originalUrl, res);
 });
 };

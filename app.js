@@ -61,15 +61,23 @@ cheers.list(app);
 var notifications = require('./js/notifications.js');
 notifications.count(app);
 notifications.list(app);
+
+var links = require('./js/links.js');
+links.troubleshooting(app);
+
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){
-  res.send('what-get???', 404);
+   console.log("UNDEFINED GET MEHTOD ----------------------------------------------------------------------")
+   console.log("URL-PATH:"+req.url);
+   console.log("BODY:"+JSON.stringify(req.body));
+
+    var response = "{\"result\": -2, \"message\": \"Unkown path "+ req.url + "\"}";
+    res.status(404).send(response);
 });
 
 app.post('*', function(req, res){
    console.log("UNDEFINED POST MEHTOD ----------------------------------------------------------------------")
    console.log("URL-PATH:"+req.url);
-   //console.log("HEADERS:"+JSON.stringify(req.headers));
    console.log("BODY:"+JSON.stringify(req.body));
 
     var response = "{\"result\": -2, \"message\": \"Unkown path "+ req.url + "\"}";
@@ -79,3 +87,4 @@ app.post('*', function(req, res){
 app.listen(3000, function() {
     console.log('Barista Mock Server listening on port 3000!');
 });
+
