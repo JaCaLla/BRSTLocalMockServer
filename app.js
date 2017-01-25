@@ -41,6 +41,7 @@ users.friends(app);
 users.cheers(app);
 users.ranking(app);
 users.get(app);
+users.search(app);
 
 var recipes = require('./js/recipes');
 recipes.list(app);
@@ -62,6 +63,7 @@ var notifications = require('./js/notifications.js');
 notifications.count(app);
 notifications.list(app);
 notifications.read(app);
+
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){
   res.send('what-get???', 404);
