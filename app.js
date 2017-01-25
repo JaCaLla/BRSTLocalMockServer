@@ -72,6 +72,7 @@ notifications.read(app);
 
 var links = require('./js/links.js');
 links.troubleshooting(app);
+links.news_latest(app);
 
 
 //The 404 Route (ALWAYS Keep this as the last route)
