@@ -1,0 +1,28 @@
+{
+  "result": 0,
+  "response": {
+    "users": [
+      {
+        "accountUuid": "5789cde9-2de0-426b-a758-bdc8ac11a102",
+        "nickname": "Baristakun",
+        "picture": "twitter",
+        "pictureUrl": {
+          "twitter": "https://preprod.nbapp.nestle.jp/ngs/twitter/picture/10122"
+        },
+        "brewEmoticonId": "E011",
+        "brewTimestamp": 1484644682155
+      },
+      {
+        "accountUuid": "5789cde9-2de0-426b-a758-bdc8ac11a103",
+        "nickname": "afornes",
+        "picture": "twitter",
+        "pictureUrl": {
+          "twitter": "http://www.afornes.es/wp-content/uploads/2015/08/perfil.jpg"
+        },
+        "brewEmoticonId": "E012",
+        "brewTimestamp": 1484644682155
+      }
+    ]
+  },
+  "currentTimestamp": 1485336009006
+}

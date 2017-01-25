@@ -41,6 +41,13 @@ users.friends(app);
 users.cheers(app);
 users.ranking(app);
 users.get(app);
+users.search(app);
+
+var facebook = require('./js/facebook.js');
+facebook.login(app);
+
+var twitter = require('./js/twitter.js');
+twitter.login(app);
 
 var recipes = require('./js/recipes');
 recipes.list(app);
@@ -61,9 +68,11 @@ cheers.list(app);
 var notifications = require('./js/notifications.js');
 notifications.count(app);
 notifications.list(app);
+notifications.read(app);
 
 var links = require('./js/links.js');
 links.troubleshooting(app);
+
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){

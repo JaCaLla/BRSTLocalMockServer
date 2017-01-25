@@ -31,3 +31,10 @@ module.exports.get = function (app) {
     fileUtils.sendJSONFile(req.originalUrl, res);
 });
 };
+
+module.exports.search = function (app) { 
+    app.post("/api/users/search", function(req, res) {
+
+    fileUtils.sendFile(req.originalUrl, res);
+});
+};
