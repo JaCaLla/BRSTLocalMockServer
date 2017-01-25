@@ -10,3 +10,9 @@ module.exports.get = function (app) {
 });
 };
 
+module.exports.update = function (app) { 
+    app.post("/api/settings/update", function(req, res) {
+
+    fileUtils.sendFile(req.originalUrl, res);
+});
+};

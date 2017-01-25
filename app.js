@@ -31,6 +31,7 @@ amuse.login(app);
 
 var settings = require('./js/settings.js');
 settings.get(app);
+settings.update(app);
 
 var customization = require('./js/customization');
 customization.get(app);
