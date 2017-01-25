@@ -43,6 +43,12 @@ users.ranking(app);
 users.get(app);
 users.search(app);
 
+var facebook = require('./js/facebook.js');
+facebook.login(app);
+
+var twitter = require('./js/twitter.js');
+twitter.login(app);
+
 var recipes = require('./js/recipes');
 recipes.list(app);
 
