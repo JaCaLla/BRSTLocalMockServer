@@ -66,6 +66,9 @@ var cheers = require('./js/cheers.js');
 cheers.create(app);
 cheers.list(app);
 
+var logout = require('./js/logout.js');
+logout.logout(app);
+
 var notifications = require('./js/notifications.js');
 notifications.count(app);
 notifications.list(app);
