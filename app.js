@@ -61,6 +61,7 @@ cheers.list(app);
 var notifications = require('./js/notifications.js');
 notifications.count(app);
 notifications.list(app);
+notifications.read(app);
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){
   res.send('what-get???', 404);

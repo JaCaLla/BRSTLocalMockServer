@@ -26,3 +26,9 @@ module.exports.list = function (app) {
         fileUtils.sendFile(req.originalUrl, res);
     });
 };
+
+module.exports.read = function (app) {
+    app.post("/api/notifications/read", function(req, res){
+        fileUtils.sendFile(req.originalUrl, res);
+    });
+};
