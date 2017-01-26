@@ -20,7 +20,24 @@
     "linePublic": false,
     "line": {
       "id": null
-    }
+        },
+        "appConfig": {
+            "secHome": {
+                "enabled": true
+            },
+            "secRecipe": {
+                "enabled": true
+            },
+            "secReward": {
+                "enabled": true
+            },
+            "secComunity": {
+                "enabled": true
+            },
+            "secMore": {
+                "enabled": true
+            }
+        }
   },
   "currentTimestamp": 1485263774196
 }
