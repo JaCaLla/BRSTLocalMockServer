@@ -42,7 +42,7 @@ module.exports.objToString = function(obj) {
 // Private/Internal
 function sendFile(filePath,res,contentType){
       
-      console.log("filepath:" + filePath);
+      //console.log("filepath:" + filePath);
        fs.readFile(filePath, 'utf8', function(err, data) {
      //   console.log(data);
         res.writeHead(200, contentType);

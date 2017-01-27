@@ -4,8 +4,10 @@ var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser')
 var fileUtils = require('./js/fileUtils.js');
-
+var morgan = require('morgan');
 var app = express();
+
+app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({
     extended: true

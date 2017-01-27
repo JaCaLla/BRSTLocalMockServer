@@ -26,7 +26,7 @@
                 "enabled": true
             },
             "secRecipe": {
-                "enabled": true
+                "enabled": false
             },
             "secReward": {
                 "enabled": true
