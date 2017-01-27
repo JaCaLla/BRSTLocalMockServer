@@ -22,11 +22,12 @@
       "id": null
         },
         "appConfig": {
+            "secDefault": "secMore",
             "secHome": {
                 "enabled": true
             },
             "secRecipe": {
-                "enabled": false
+                "enabled": true
             },
             "secReward": {
                 "enabled": true
